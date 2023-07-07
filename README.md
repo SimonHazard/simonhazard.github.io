@@ -1,2 +1,6 @@
-# simonhazard.com
-My personal website
+# My personal website 🚀
+
+- Vite
+- React
+- TypeScript
+- Tailwind CSS
