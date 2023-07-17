@@ -1,35 +1,39 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import cv from '/resume.pdf';
+import image from './assets/image.jpg';
+import Layout from './layout/Layout';
 
-function App() {
-  const [count, setCount] = useState(0);
-
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+    <Layout>
+      <div className="flex h-full w-full grow flex-col items-center justify-center gap-4 text-slate-700">
+        <img
+          className="mx-auto h-48 w-48 rounded-full shadow"
+          src={image}
+          alt="Picture of me"
+        />
+        <div className="flex flex-col gap-2 text-center">
+          <div className="text-xl lg:text-3xl">French web developer</div>
+          <div className="text-lg ">
+            This website is currently in development, please check my{' '}
+            <span>
+              <a
+                className="underline hover:text-slate-900"
+                href="https://github.com/SimonHazard/simonhazard.com/blob/main/README.md"
+              >
+                roadmap
+              </a>
+            </span>
+          </div>
+        </div>
+        <a
+          className="rounded-full border border-creme-600 px-4 py-1 shadow-md hover:bg-creme-100 lg:text-xl"
+          href={cv}
+        >
+          Resume
         </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </Layout>
   );
-}
+};
 
 export default App;
