@@ -4,7 +4,7 @@ import Header from './Header';
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="flex h-screen w-screen flex-col justify-between bg-creme-50">
+    <div className="relative flex h-full min-h-screen w-full flex-col justify-between bg-zinc-100">
       <Header />
       <main>{children}</main>
       <Footer />
