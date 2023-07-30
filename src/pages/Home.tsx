@@ -2,19 +2,12 @@ import cv from '/resume.pdf';
 
 const Home = () => {
   return (
-    <div className="flex grow flex-col items-center justify-center gap-4 p-8 text-slate-700 lg:container lg:mx-auto xl:w-3/4">
-      <div className="flex flex-col gap-2 text-center">
+    <div className="flex flex-col items-center justify-center gap-4 p-8 text-slate-700 lg:container lg:mx-auto xl:w-3/4">
+      <div className="flex flex-col items-center gap-2 text-center">
         <div className="text-xl lg:text-3xl">French web developer</div>
-        <div className="text-lg ">
-          This website is currently in development, please check my{' '}
-          <span>
-            <a
-              className="underline hover:text-slate-900"
-              href="https://github.com/SimonHazard/simonhazard.com/blob/main/README.md"
-            >
-              roadmap
-            </a>
-          </span>
+        <div className="text-lg sm:w-2/3">
+          I'm Simon, based in Le Havre. I develop mainly in NodeJS ecosystem
+          with TypeScript and I enjoy discovering new things.
         </div>
       </div>
       <a
