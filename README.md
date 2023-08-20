@@ -13,5 +13,7 @@
 - [ ] Better styling & responsive header
 - [ ] Setup Husky
 - [x] Add routing
+- [x] Add playwright tests
+- [x] Add Dependabot
 - [x] Add a page for my articles
 - [ ] Add a page for my hobbies
