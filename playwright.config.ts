@@ -66,12 +66,12 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ],
+  ]
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'pnpm run dev',
-    url: 'http://127.0.0.1:5173',
-    reuseExistingServer: !process.env.CI
-  }
+  // webServer: {
+  //   command: 'pnpm run dev',
+  //   url: 'http://127.0.0.1:5173',
+  //   reuseExistingServer: !process.env.CI
+  // }
 });
