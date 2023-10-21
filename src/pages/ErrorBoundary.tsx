@@ -5,7 +5,7 @@ const ErrorBoundary = () => {
   let errorMessage: string;
 
   if (isRouteErrorResponse(error)) {
-    errorMessage = error.error?.message || error.statusText;
+    errorMessage = error.statusText;
   } else if (error instanceof Error) {
     errorMessage = error.message;
   } else if (typeof error === 'string') {
