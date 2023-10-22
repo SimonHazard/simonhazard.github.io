@@ -3,6 +3,8 @@ import ErrorBoundary from './pages/ErrorBoundary.tsx';
 import Layout from './layout/Layout.tsx';
 import Home from './pages/Home.tsx';
 import Articles from './pages/Articles.tsx';
+import Article from './pages/Article.tsx';
+import { fetchArticle } from './utils/articles.ts';
 
 const router = createHashRouter([
   {
@@ -16,7 +18,14 @@ const router = createHashRouter([
       },
       {
         path: '/articles',
-        element: <Articles />
+        children: [
+          { index: true, element: <Articles /> },
+          {
+            path: ':articleName',
+            loader: ({ params }) => fetchArticle(params.articleName),
+            element: <Article />
+          }
+        ]
       }
     ]
   }
