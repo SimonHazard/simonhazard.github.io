@@ -10,17 +10,6 @@ const Footer = () => {
         >
           <FaGithub />
         </a>
-        <div className="text-center">
-          This website is currently in development, please check my{' '}
-          <span>
-            <a
-              className="underline hover:text-slate-900"
-              href="https://github.com/SimonHazard/simonhazard.com/blob/main/README.md"
-            >
-              roadmap
-            </a>
-          </span>
-        </div>
       </div>
     </footer>
   );
