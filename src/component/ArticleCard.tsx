@@ -1,18 +1,18 @@
 import { FaArrowRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-type CardProps = {
+type ArticleCardProps = {
   title: string;
   description: string;
   href: string;
 };
 
-const Card = ({ title, description, href }: CardProps) => {
+const ArticleCard = ({ title, description, href }: ArticleCardProps) => {
   return (
-    <div className="flex max-w-3xl flex-col justify-between rounded-lg border border-gray-200 bg-white p-6 text-start shadow">
+    <div className="flex flex-col justify-between rounded-xl border border-gray-200 bg-white p-6 text-start shadow-sm">
       <div>
         <Link to={href}>
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-slate-900">
+          <h5 className="mb-2 text-xl font-bold tracking-tight text-slate-800">
             {title}
           </h5>
         </Link>
@@ -30,4 +30,4 @@ const Card = ({ title, description, href }: CardProps) => {
   );
 };
 
-export default Card;
+export default ArticleCard;

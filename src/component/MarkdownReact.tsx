@@ -6,7 +6,7 @@ type Props = { markdownContent: string };
 const MarkdownReader: FC<Props> = ({ markdownContent }) => {
   return (
     <ReactMarkdown
-      className="prose max-w-max text-justify"
+      className="prose max-w-max text-justify prose-img:mx-auto"
       children={markdownContent}
     />
   );
