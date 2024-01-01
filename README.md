@@ -11,8 +11,8 @@
 
 - [x] Build a CI/CD pipeline with Github Actions
 - [ ] Better styling & responsive header
-- [ ] Setup playwright
-- [ ] Setup Husky
+- [ ] Change Tailwind to PandaCSS
+- [ ] Add [motion](https://www.framer.com/motion/)
 - [x] Add routing
 - [x] Add playwright tests
 - [x] Add Dependabot
