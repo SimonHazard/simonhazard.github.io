@@ -8,7 +8,7 @@ const description =
 
 const Home = () => {
   return (
-    <div className="mx-auto flex max-w-xl flex-col gap-6 text-slate-700">
+    <div className="mx-auto flex max-w-xl flex-col gap-6 p-4 text-slate-700">
       <section className="flex flex-col gap-3">
         <div>
           <img
@@ -23,7 +23,7 @@ const Home = () => {
         </div>
 
         <div>
-          <div className="w-full rounded-xl border-gray-200 bg-white px-4 py-3 shadow-sm">
+          <div className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm">
             <p className="font-mono">
               {description.split('').map((char, index) => {
                 return (
