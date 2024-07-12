@@ -9,7 +9,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Simon Hazard",
-  description: "Simon Hazard website",
+  description: "Developer front-end based in Le Havre",
+  openGraph: {
+    title: "Simon Hazard",
+    description: "Developer front-end based in Le Havre",
+    type: "website",
+    url: "https://www.simonhazard.com/",
+    siteName: "Simon Hazard",
+  },
 };
 
 export default function RootLayout({
