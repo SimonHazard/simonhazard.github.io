@@ -12,11 +12,11 @@ export default function LatestArticles() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 mt-8 md:mt-12 lg:mt-16">
       {articles.slice(0, 3).map((article, index) => (
-        <Card key={index}>
+        <Card key={index} className="flex flex-col">
           <CardHeader>
             <CardTitle>{article.title}</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex-grow">
             <p className="text-muted-foreground">{article.description}</p>
           </CardContent>
           <CardFooter>
