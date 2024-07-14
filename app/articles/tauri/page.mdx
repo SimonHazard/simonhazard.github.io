@@ -2,6 +2,82 @@
     <div className="prose max-w-none prose-slate prose-lg lg:prose-xl">
         # From Electron to Tauri
 
-        Currently writing
+        ## Context
+
+        Recently I started an open source project, MemeOver, an overlay that displays memes sent from a Discord channel. For this, I needed an ecosystem that would allow me to create a lightweight overlay. Based on popular applications, I naturally turned to [Electron](https://www.electronjs.org/).
+
+        ## Electron
+
+        Starting with the documentation, you're quickly directed to all-in-one packages to get your application started, such as [Electron Forge](https://www.electronforge.io/) or [Electron-fiddle](https://www.electronjs.org/fiddle). In fact, Electron requires a great deal of configuration in order to work at its best both in development and in build. If you decide to make an Electron app, I advise you to start with one of these packages.
+
+        After several hours of battling with the CI and project configuration, I managed to deploy a release of my POC for my overlay, so I knew that Electron would enable me to realize my project.
+
+        However, I remember spending a lot of time configuring the project, even though it was a silly overlay-style "Hello World", mainly because the documentation wasn't very clear.
+
+        Electron is very heavy to use and not at all intuitive. Both in development and in build. And in terms of optimization and performance, it's not better. 100 MB for an .exe with a simple overlay that displays HTML, with no fancy libraries.
+
+        <div className="w-full flex justify-center">
+            <img src="/static/articles/tauri/electron-assets.png" alt="electron-assets" />
+        </div>
+
+        And 60 MB ram for an idle application that doesn't display anything isn't much compared with other applications, but MemeOver's aim is to be as unobtrusive as possible.
+
+        <div className="w-full flex justify-center">
+            <img src="/static/articles/tauri/electron-task-manager.png" alt="electron-task-manager" />
+        </div>
+
+        These two points were bothering me, I couldn't understand why it was taking up so many resources when I started with Electron Forge + Vite vanilla.
+
+        <div className="w-full flex justify-center">
+            <img src="/static/articles/tauri/why.png" className="w-[230px]" alt="why" />
+        </div>
+
+        So I started looking into whether it was possible to optimize all this. Then, in a Reddit post, I saw a user talking about an alternative to Electron, [Tauri](https://v2.tauri.app/).
+
+        ## Tauri
+
+        > Tauri is a framework for building tiny, blazingly fast binaries for all major desktop platforms. Developers can integrate any front-end framework that compiles to HTML, JS and CSS for building their user interface. The backend of the application is a rust-sourced binary with an API that the front-end can interact with.
+        > 
+
+        This framework built in Rust ticks all the boxes for my app, so I decided to test it, more specifically v2. First of all, the configuration was hyper-straightforward, light with clear documentation, but not complete as it was still in beta. In one evening, I was able to migrate my entire Electron app to Tauri very simply.
+
+        <figure className="w-full flex flex-col items-center">
+            <img src="/static/articles/tauri/chad.png" className="w-[230px]" alt="chad" />
+            <figcaption>Any random library built on Rust</figcaption>
+        </figure>
+
+        So, I deploy a release with the same functionalities as my Electron app. Then, the .exe under 2MB!
+
+        <div className="w-full flex justify-center">
+            <img src="/static/articles/tauri/tauri-assets.png" alt="tauri-assets" />
+        </div>
+
+        So for the moment I'm very satisfied, and it's a good thing my app will be used via Discord. 100 MB is a pain to transfer between friends, but 2 MB is possible. My app had to be easy to share, so bingo. Especially as the .exe installation was much more user-friendly than the Electron app build.
+
+        And in terms of resources, I'm equally happy, with a drastic drop in RAM consumption.
+
+        <div className="w-full flex justify-center">
+            <img src="/static/articles/tauri/tauri-task-manager.png" alt="tauri-task-manager" />
+        </div>
+
+        Well, in reality, there's still the whole WebView2 Manager process running alongside. But the application itself consumes 10 times less power.
+
+        <div className="w-full flex justify-center">
+            <img src="/static/articles/tauri/tauri-task-manager-2.png" alt="tauri-task-manager-2" />
+        </div>
+
+        When I started manipulating Tauri's Rust to create multiple windows, I saw that the resources used weren't stupidly multiplied by the number of windows - WebView2 handles this very well. So from then on, I'm a winner in terms of performance.
+
+        ## Conclusion
+
+        So in terms of weight, Tauri blows Electron away. In terms of performance, use is much smoother and more unobtrusive on your Windows, thanks, I suppose, to WebView2. However, I haven't tested other OSes.
+
+        The big advantage of Tauri is its built-in Rust. In my case, I use it to manage my app's tray icon, multi WebView and communication between its WebViews.
+
+        Straightforward application and CI configuration.
+
+        And very good documentation compared to Electron, although Tauri v2 documentation is still WIP.
+
+        In short, if you want to build a small application with your favorite JS framework, I highly recommend Tauri.
     </div>
 </div>

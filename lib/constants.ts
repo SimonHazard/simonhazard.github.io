@@ -7,13 +7,8 @@ export const articles = [
   },
   {
     title: "From Electron to Tauri",
-    description: "Currently writing",
+    description: "Sharing my experience after switching from Electron to Tauri",
     link: "articles/tauri",
-  },
-  {
-    title: "Experience feedback BiomeJS",
-    description: "Currently writing",
-    link: "articles/biomejs",
   },
 ];
 
