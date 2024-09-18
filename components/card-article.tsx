@@ -8,7 +8,7 @@ import {
 } from "./ui/card";
 import { articles } from "@/lib/constants";
 
-export default function LatestArticles() {
+export default function CardArticle() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 mt-8 md:mt-12 lg:mt-16">
       {articles.slice(0, 3).map((article, index) => (

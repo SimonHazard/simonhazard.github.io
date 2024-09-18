@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Projects from "@/components/projects";
-import LatestArticles from "@/components/latestArticles";
+import CardArticle from "@/components/card-article";
 import Link from "next/link";
 
 export default function Home() {
@@ -53,7 +53,7 @@ export default function Home() {
               Read my latest thoughts and insights.
             </p>
           </div>
-          <LatestArticles />
+          <CardArticle />
           <div className="mt-8 md:mt-10 lg:mt-12 w-full flex justify-center items-center">
             <Link
               href="/articles"

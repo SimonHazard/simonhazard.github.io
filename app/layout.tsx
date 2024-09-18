@@ -5,6 +5,13 @@ import { Header } from "@/components/header";
 import Footer from "@/components/footer";
 import { cn } from "@/lib/utils";
 
+import { PHProvider } from "./providers";
+import dynamic from "next/dynamic";
+
+const PostHogPageView = dynamic(() => import("./PostHogPageView"), {
+  ssr: false,
+});
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -26,13 +33,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn("overflow-y-scroll", inter.className)}>
-        <div className="flex flex-col min-h-dvh">
-          <Header />
-          {children}
-          <Footer />
-        </div>
-      </body>
+      <PHProvider>
+        <body className={cn("overflow-y-scroll", inter.className)}>
+          <PostHogPageView />
+          <div className="flex flex-col min-h-dvh">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+        </body>
+      </PHProvider>
     </html>
   );
 }
