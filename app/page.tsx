@@ -1,79 +1,129 @@
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import Projects from "@/components/projects";
-import CardArticle from "@/components/card-article";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex-1 flex flex-col">
-      <section className="bg-background py-12 md:py-16 lg:py-20 flex-grow">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
-          <div className="space-y-4 md:space-y-6 lg:space-y-8">
-            <div>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                Welcome to my Portfolio
-              </h1>
-              <p className="text-muted-foreground text-md md:text-lg lg:text-xl">
-                Front-end developer
-              </p>
-            </div>
-            <p className="text-muted-foreground text-lg md:text-xl lg:text-2xl">
-              Developer based in Le Havre. I develop mainly in NodeJS ecosystem
-              with TypeScript and I enjoy discovering new things. Discover my
-              latest projects.
-            </p>
-            <div className="flex gap-4">
+    <div className="min-h-screen container mx-auto flex flex-col items-center justify-center">
+      <main className="flex flex-col gap-8 items-center m-8">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+          simon.hazard
+        </h1>
+        <section className="flex flex-col gap-8 items-center">
+          <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+            about
+          </h2>
+          <p className="leading-7 max-w-2xl text-justify md:text-center">
+            Developer specializing in the TypeScript ecosystem, open to working
+            with any modern framework or library. Passionate about front-end
+            development, I stay curious about new technologies and best
+            practices, always striving for clean and high-quality code.
+          </p>
+          <div className="flex h-5 items-center space-x-4 text-sm">
+            <Button asChild>
               <a
-                href="/static/resume.pdf"
-                className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-1"
+                href="/static/simon-hazard.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Resume
+                resume
               </a>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <Image
-              className="mb-2 max-w-full rounded-full shadow-md"
-              width={250}
-              height={250}
-              src="/static/image.jpg"
-              alt="Picture of me"
-              unoptimized
-            />
-          </div>
-        </div>
-      </section>
-      <section className="bg-muted py-12 md:py-16 lg:py-20 flex-grow">
-        <div className="container mx-auto">
-          <div className="space-y-4 md:space-y-6 lg:space-y-8 text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Latest Articles
-            </h2>
-            <p className="text-muted-foreground text-lg md:text-xl lg:text-2xl">
-              Read my latest thoughts and insights.
-            </p>
-          </div>
-          <CardArticle />
-          <div className="mt-8 md:mt-10 lg:mt-12 w-full flex justify-center items-center">
-            <Link
-              href="/articles"
-              className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus:outline-none focus:ring-1 focus:ring-primary focus:ring-offset-1"
+            </Button>
+            <Separator orientation="vertical" />
+            <a
+              href="https://github.com/SimonHazard"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full"
             >
-              More articles...
+              <Image
+                src="/static/icons/github.svg"
+                width={32}
+                height={32}
+                alt="Github"
+              />
+            </a>
+          </div>
+        </section>
+        <Separator />
+        <section className="flex flex-col gap-8 items-center">
+          <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+            projects
+          </h2>
+          <div>
+            <Card className="w-[400px]">
+              <CardHeader>
+                <CardTitle>MemeOver</CardTitle>
+                <CardDescription>
+                  An overlay application that lets friends send memes to each
+                  other in real time from a Discord text channel.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex gap-4 justify-center">
+                  <Image
+                    src="/static/icons/go.svg"
+                    width={48}
+                    height={48}
+                    alt="Go"
+                  />
+                  <Image
+                    src="/static/icons/vite.svg"
+                    width={48}
+                    height={48}
+                    alt="Vite"
+                  />
+                  <Image
+                    src="/static/icons/tauri.svg"
+                    width={48}
+                    height={48}
+                    alt="Tauri"
+                  />
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button asChild>
+                  <a
+                    href="https://github.com/SimonHazard/MemeOver"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full"
+                  >
+                    open
+                  </a>
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+        </section>
+        <Separator />
+        <section className="flex flex-col gap-8 items-center">
+          <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">
+            articles
+          </h2>
+          <div className="flex flex-col gap-4">
+            <Link href={"articles/tauri"}>
+              <Button variant="outline" className="w-full">
+                feedback tauri
+              </Button>
+            </Link>
+            <Link href={"articles/webpack-to-vite"}>
+              <Button variant="outline" className="w-full">
+                feedback webpack to vite
+              </Button>
             </Link>
           </div>
-        </div>
-      </section>
-      <section className="bg-background py-12 md:py-16 lg:py-20 flex-grow">
-        <div className="container mx-auto">
-          <div className="space-y-4 md:space-y-6 lg:space-y-8">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              Projects
-            </h1>
-            <Projects />
-          </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </div>
   );
 }
