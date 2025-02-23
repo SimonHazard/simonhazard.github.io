@@ -6,11 +6,11 @@ import Link from "next/link";
     <div className="container mx-auto max-w-full lg:max-w-2xl prose prose-headings:mt-8 prose-headings:font-semibold prose-headings:text-black prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl prose-h5:text-xl prose-h6:text-lg dark:prose-headings:text-white">
         <div className="flex justify-between items-center">
             <h1>Experience feedback from Webpack to Vite</h1>
-            <Link href='/' replace>
-                <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" asChild>
+                <Link href='/' replace>
                     <ChevronLeft />
-                </Button>
-            </Link>
+                </Link>
+            </Button>
         </div>
 
         At my job, I had the opportunity to maintain applications and upgrade their packages, during which I suggested the implementation of Vite. These projects initially used, for one of them, a vanilla Webpack configuration for Create React App (CRA) (project A), and for the other one, a custom Webpack configuration with several plugins (project B).

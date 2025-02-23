@@ -111,16 +111,16 @@ export default function Home() {
             articles
           </h2>
           <div className="flex flex-col gap-4">
-            <Link href={"articles/tauri"}>
-              <Button variant="outline" className="w-full">
+            <Button variant="outline" asChild>
+              <Link href={"articles/tauri"} className="w-full">
                 feedback tauri
-              </Button>
-            </Link>
-            <Link href={"articles/webpack-to-vite"}>
-              <Button variant="outline" className="w-full">
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href={"articles/webpack-to-vite"} className="w-full">
                 feedback webpack to vite
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
         </section>
       </main>
