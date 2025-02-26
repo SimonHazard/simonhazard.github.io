@@ -75,8 +75,8 @@ export default function Home() {
                       <Badge variant="secondary">WIP</Badge>
                     </TooltipTrigger>
                     <TooltipContent>
-                      I'm currently refactoring the discord bot with Bun and
-                      discord.js
+                      I&apos;m currently refactoring the discord bot with Bun
+                      and discord.js
                     </TooltipContent>
                   </Tooltip>
                 </CardTitle>
