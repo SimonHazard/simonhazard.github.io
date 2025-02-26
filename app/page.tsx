@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,13 +9,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen container mx-auto flex flex-col items-center justify-center">
-      <main className="flex flex-col gap-8 items-center m-8">
+    <div className="min-h-screen w-full flex items-center justify-center">
+      <main className="flex flex-col gap-8 items-center container mx-auto p-4 md:p-8 h-full">
         <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
           simon.hazard
         </h1>
@@ -60,9 +66,20 @@ export default function Home() {
             projects
           </h2>
           <div>
-            <Card className="w-[400px]">
+            <Card className="max-w-[400px] min-w-[300px]">
               <CardHeader>
-                <CardTitle>MemeOver</CardTitle>
+                <CardTitle>
+                  MemeOver{" "}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Badge variant="secondary">WIP</Badge>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      I'm currently refactoring the discord bot with Bun and
+                      discord.js
+                    </TooltipContent>
+                  </Tooltip>
+                </CardTitle>
                 <CardDescription>
                   An overlay application that lets friends send memes to each
                   other in real time from a Discord text channel.
