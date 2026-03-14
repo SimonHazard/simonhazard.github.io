@@ -7,10 +7,9 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
+  output: "static",
   site: "https://simonhazard.com",
-  adapter: cloudflare({
-    imageService: "passthrough",
-  }),
+  adapter: cloudflare(),
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
