@@ -1,0 +1,25 @@
+---
+import Base from "@/layouts/Base.astro";
+import ProjectCard from "@/components/custom/ProjectCard.astro";
+import { getCollection } from "astro:content";
+import { t } from "@/i18n/utils";
+const allProjects = await getCollection("projects");
+---
+
+<Base title={t("projects.title")} description={t("projects.description")}>
+  <div class="animate-slide-up">
+    <h1 class="font-black text-3xl md:text-4xl mb-10">{t("projects.title")}</h1>
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {allProjects.map((project) => (
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          stack={project.data.stack}
+          githubUrl={project.data.githubUrl}
+          liveUrl={project.data.liveUrl}
+        />
+      ))}
+    </div>
+  </div>
+</Base>

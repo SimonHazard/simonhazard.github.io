@@ -1,0 +1,48 @@
+---
+import Base from "@/layouts/Base.astro";
+import Barcode from "@/components/custom/Barcode.astro";
+import { t } from "@/i18n/utils";
+---
+
+<Base title={t("about.title")} description={t("about.description")}>
+  <div class="animate-slide-up max-w-2xl">
+    <h1 class="font-black text-3xl md:text-4xl mb-10">{t("about.title")}</h1>
+
+    <div class="flex items-center gap-3 mb-6">
+      <Barcode />
+      <span class="label-ui text-muted-foreground">{t("about.bio")}</span>
+    </div>
+
+    <div class="space-y-4 text-foreground leading-relaxed">
+      <p>{t("about.p1")}</p>
+      <p>{t("about.p2")}</p>
+      <p>{t("about.p3")}</p>
+    </div>
+
+    <div class="mt-12">
+      <div class="flex items-center gap-3 mb-6">
+        <Barcode />
+        <span class="label-ui text-muted-foreground">{t("about.contact")}</span>
+      </div>
+
+      <div class="flex flex-wrap gap-4">
+        <a
+          href="https://github.com/SimonHazard"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.15em] font-bold border border-border h-10 px-6 rounded-sm hover:bg-primary hover:text-primary-foreground transition-all duration-75"
+          aria-label="GitHub profile"
+        >
+          GitHub
+        </a>
+        <a
+          href="/static/simon-hazard.pdf"
+          download
+          class="inline-flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.15em] font-bold bg-primary text-primary-foreground h-10 px-6 rounded-sm hover:brightness-110 transition-all duration-75"
+        >
+          {t("home.downloadCV")}
+        </a>
+      </div>
+    </div>
+  </div>
+</Base>

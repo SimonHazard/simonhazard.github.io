@@ -1,0 +1,80 @@
+---
+import DarkModeToggle from "./DarkModeToggle.astro";
+import { Menu } from "@lucide/astro";
+import { t } from "@/i18n/utils";
+
+const links = [
+  { href: "/", label: t("nav.home") },
+  { href: "/articles", label: t("nav.articles") },
+  { href: "/projects", label: t("nav.projects") },
+  { href: "/about", label: t("nav.about") },
+];
+
+const currentPath = Astro.url.pathname;
+const navLinks = links.map((link) => ({
+  ...link,
+  active: currentPath === link.href || (link.href !== "/" && currentPath.startsWith(link.href)),
+}));
+---
+
+<nav class="sticky top-0 z-50 bg-background border-b border-border no-print">
+  <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+    <a href="/" class="font-black text-lg tracking-tight hover:text-primary transition-colors" aria-label={t("nav.home")}>
+      SH
+    </a>
+
+    <div class="hidden md:flex items-center gap-6">
+      {navLinks.map(({ href, label, active }) => (
+        <a
+          href={href}
+          class:list={[
+            "label-ui transition-colors hover:text-primary",
+            active ? "text-primary" : "text-muted-foreground",
+          ]}
+        >
+          {label}
+        </a>
+      ))}
+      <DarkModeToggle />
+    </div>
+
+    <div class="flex md:hidden items-center gap-2">
+      <DarkModeToggle />
+      <button
+        data-mobile-menu-btn
+        class="h-10 w-10 flex items-center justify-center border border-border rounded-sm cursor-pointer"
+        aria-label={t("nav.openMenu")}
+        aria-expanded="false"
+      >
+        <Menu class="size-4" />
+      </button>
+    </div>
+  </div>
+
+  <div data-mobile-menu class="hidden md:hidden border-t border-border bg-background">
+    <div class="flex flex-col px-4 py-4 gap-4">
+      {navLinks.map(({ href, label, active }) => (
+        <a
+          href={href}
+          class:list={[
+            "label-ui transition-colors",
+            active ? "text-primary" : "text-muted-foreground",
+          ]}
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+  </div>
+</nav>
+
+<script>
+  const menu = document.querySelector("[data-mobile-menu]");
+  document.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest("[data-mobile-menu-btn]");
+    if (!btn) return;
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!expanded));
+    menu?.classList.toggle("hidden");
+  });
+</script>

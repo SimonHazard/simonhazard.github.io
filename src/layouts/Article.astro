@@ -1,0 +1,56 @@
+---
+import Base from "./Base.astro";
+import { formatDate } from "@/lib/utils";
+import { t } from "@/i18n/utils";
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  category: string;
+  tags: string[];
+  lang: "fr" | "en";
+  cover?: string;
+  ai?: boolean;
+}
+
+const { title, description, date, category, tags, lang, cover, ai } = Astro.props;
+---
+
+<Base title={title} description={description} ogImage={cover}>
+  <article class="animate-in">
+    <header class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="label-ui text-primary">{category}</span>
+        <span class="label-ui text-muted-foreground">{formatDate(date, lang)}</span>
+        <span class="label-ui border border-input px-1.5 py-0.5 text-muted-foreground">{lang.toUpperCase()}</span>
+      </div>
+
+      <h1 class="font-black text-3xl md:text-4xl mb-4">{title}</h1>
+
+      <p class="text-lg text-muted-foreground">{description}</p>
+
+      <div class="flex flex-wrap gap-2 mt-4">
+        {tags.map((tag) => (
+          <span class="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.15em] border border-input px-2 py-0.5 text-muted-foreground">
+            {tag}
+          </span>
+        ))}
+        {ai && (
+          <span class="relative group/ai inline-flex">
+            <span class="inline-flex items-center font-mono text-[10px] uppercase tracking-[0.15em] border border-input px-2 py-0.5 text-muted-foreground cursor-help">
+              {t("articles.aiAssisted")}
+            </span>
+            <span class="absolute top-full left-0 mt-2 w-56 p-2.5 text-[10px] font-mono normal-case tracking-normal leading-relaxed bg-card border border-border text-muted-foreground opacity-0 group-hover/ai:opacity-100 transition-opacity duration-150 pointer-events-none z-20">
+              {t("articles.aiAssistedDescription")}
+            </span>
+          </span>
+        )}
+      </div>
+    </header>
+
+    <div class="article-prose max-w-none">
+      <slot />
+    </div>
+  </article>
+</Base>

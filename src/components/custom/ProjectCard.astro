@@ -1,0 +1,60 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  stack: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+}
+
+import { ExternalLink, ArrowRight } from "@lucide/astro";
+import SimpleIcon from "./SimpleIcon.astro";
+import { siGithub } from "simple-icons";
+
+const { title, description, stack, githubUrl, liveUrl } = Astro.props;
+---
+
+<article class="group relative border border-border rounded-sm p-4 sm:p-6 transition-all duration-75 [@media(hover:hover)]:hover:translate-x-0.5 [@media(hover:hover)]:hover:translate-y-0.5 bg-card">
+  <div class="absolute inset-0 border border-border rounded-sm -translate-x-0.5 -translate-y-0.5 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-75 pointer-events-none" aria-hidden="true"></div>
+
+  <h3 class="font-black text-base sm:text-lg mb-2 [@media(hover:hover)]:group-hover:text-primary transition-colors">
+    {title}
+  </h3>
+
+  <p class="text-sm text-muted-foreground mb-4">
+    {description}
+  </p>
+
+  <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
+    {stack.map((tech) => (
+      <span class="inline-flex items-center font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] bg-primary text-primary-foreground px-1.5 sm:px-2 py-0.5">
+        {tech}
+      </span>
+    ))}
+  </div>
+
+  <div class="flex gap-3">
+    {githubUrl && (
+      <a
+        href={githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="label-ui inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
+        aria-label={`View source code of ${title} on GitHub`}
+      >
+        <SimpleIcon path={siGithub.path} title={siGithub.title} class="size-3.5" /> GitHub <ArrowRight class="size-3" />
+      </a>
+    )}
+    {liveUrl && (
+      <a
+        href={liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="label-ui inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
+        aria-label={`View website of ${title}`}
+      >
+        <ExternalLink class="size-3.5" /> Website <ArrowRight class="size-3" />
+      </a>
+    )}
+  </div>
+</article>

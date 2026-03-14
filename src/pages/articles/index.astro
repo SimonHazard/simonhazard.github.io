@@ -1,0 +1,80 @@
+---
+import Base from "@/layouts/Base.astro";
+import ArticleCard from "@/components/custom/ArticleCard.astro";
+import { getCollection } from "astro:content";
+import { t } from "@/i18n/utils";
+import { sortByDate } from "@/lib/utils";
+
+const allArticles = await getCollection("articles", ({ data }) => !data.draft);
+const sorted = sortByDate(allArticles);
+
+const categories = ["tech"] as const;
+const allTags = [...new Set(allArticles.flatMap((a) => a.data.tags))].sort();
+---
+
+<Base title={t("articles.title")} description={t("articles.description")}>
+  <div class="animate-slide-up">
+    <h1 class="font-black text-3xl md:text-4xl mb-8">{t("articles.title")}</h1>
+
+    <div class="flex flex-wrap gap-2 mb-6" id="category-filters">
+      <button
+        type="button"
+        data-category=""
+        class="filter-cat active label-ui px-3 py-1.5 border rounded-sm transition-all duration-75 cursor-pointer border-primary text-primary"
+        aria-pressed="true"
+      >
+        {t("articles.all")}
+      </button>
+      {categories.map((cat) => (
+        <button
+          type="button"
+          data-category={cat}
+          class="filter-cat label-ui px-3 py-1.5 border rounded-sm transition-all duration-75 cursor-pointer border-input text-muted-foreground hover:border-primary hover:text-primary"
+          aria-pressed="false"
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    {allTags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-10" id="tag-filters">
+        {allTags.map((tag) => (
+          <button
+            type="button"
+            data-tag={tag}
+            class="filter-tag label-ui px-2 py-0.5 border rounded-sm transition-all duration-75 cursor-pointer border-input text-muted-foreground hover:border-primary hover:text-primary"
+            aria-pressed="false"
+          >
+            {tag}
+          </button>
+        ))}
+      </div>
+    )}
+
+    <div class="grid gap-4" id="articles-grid">
+      {sorted.map((article) => (
+        <div data-article-category={article.data.category} data-article-tags={article.data.tags.join(",")}>
+          <ArticleCard
+            title={article.data.title}
+            description={article.data.description}
+            date={article.data.date}
+            category={article.data.category}
+            tags={article.data.tags}
+            lang={article.data.lang}
+            href={`/articles/${article.id}`}
+            ai={article.data.ai}
+          />
+        </div>
+      ))}
+    </div>
+
+    <p class="text-muted-foreground text-center py-12 hidden" id="no-results">
+      {t("articles.noResults")}
+    </p>
+  </div>
+</Base>
+
+<script>
+  import "@/scripts/articleFilter";
+</script>
