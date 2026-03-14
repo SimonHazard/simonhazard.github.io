@@ -9,7 +9,9 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   output: "static",
   site: "https://simonhazard.com",
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    imageService: "compile",
+  }),
   integrations: [mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
