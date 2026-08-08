@@ -2,16 +2,17 @@
 interface Props {
   title: string;
   description: string;
+  disclaimer?: string;
   stack: string[];
   githubUrl?: string;
   liveUrl?: string;
 }
 
-import { ExternalLink, ArrowRight } from "@lucide/astro";
+import { ExternalLink, ArrowRight, Info } from "@lucide/astro";
 import SimpleIcon from "./SimpleIcon.astro";
 import { siGithub } from "simple-icons";
 
-const { title, description, stack, githubUrl, liveUrl } = Astro.props;
+const { title, description, disclaimer, stack, githubUrl, liveUrl } = Astro.props;
 ---
 
 <article class="group relative border border-border rounded-sm p-4 sm:p-6 transition-all duration-75 [@media(hover:hover)]:hover:translate-x-0.5 [@media(hover:hover)]:hover:translate-y-0.5 bg-card">
@@ -24,6 +25,13 @@ const { title, description, stack, githubUrl, liveUrl } = Astro.props;
   <p class="text-sm text-muted-foreground mb-4">
     {description}
   </p>
+
+  {disclaimer && (
+    <p class="flex items-start gap-2 border-l-2 border-primary/50 pl-3 mb-4 text-xs leading-relaxed text-muted-foreground">
+      <Info class="size-3.5 mt-0.5 shrink-0 text-primary" aria-hidden="true" />
+      <span>{disclaimer}</span>
+    </p>
+  )}
 
   <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
     {stack.map((tech) => (

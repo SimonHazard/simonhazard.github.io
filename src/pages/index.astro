@@ -60,6 +60,7 @@ const latestArticles = sortByDate(allArticles).slice(0, 3);
           <ProjectCard
             title={project.data.title}
             description={project.data.description}
+            disclaimer={project.data.disclaimer}
             stack={project.data.stack}
             githubUrl={project.data.githubUrl}
             liveUrl={project.data.liveUrl}
