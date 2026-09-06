@@ -7,10 +7,10 @@ const allProjects = await getCollection("projects");
 ---
 
 <Base title={t("projects.title")} description={t("projects.description")}>
-  <div class="animate-slide-up">
-    <h1 class="font-black text-3xl md:text-4xl mb-10">{t("projects.title")}</h1>
+  <div>
+    <header class="page-heading"><p class="eyebrow">Independent projects & experiments</p><h1>Built out of curiosity.</h1><p>Tools for everyday work. Games for good company. Explore the things I make.</p></header>
 
-    <div class="grid gap-4 md:grid-cols-2">
+    <div class="project-grid all-projects">
       {allProjects.map((project) => (
         <ProjectCard
           title={project.data.title}

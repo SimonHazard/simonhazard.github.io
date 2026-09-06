@@ -7,62 +7,36 @@ interface Props {
   githubUrl?: string;
   liveUrl?: string;
 }
-
-import { ExternalLink, ArrowRight, Info } from "@lucide/astro";
-import SimpleIcon from "./SimpleIcon.astro";
-import { siGithub } from "simple-icons";
-
+import { ArrowUpRight, Layers, Mic, ScanEye, StickyNote } from "@lucide/astro";
 const { title, description, disclaimer, stack, githubUrl, liveUrl } = Astro.props;
+const identities: Record<string, { label: string; accent: string; icon: typeof Layers }> = {
+  Charon: { label: "Capture / Organize", accent: "lime", icon: StickyNote },
+  MemeOver: { label: "Connect / Share", accent: "violet", icon: Layers },
+  Mimikit: { label: "Dub / Play", accent: "orange", icon: Mic },
+  Undercover: { label: "Bluff / Discover", accent: "cyan", icon: ScanEye },
+};
+const identity = identities[title] ?? {
+  label: "Independent project",
+  accent: "lime",
+  icon: Layers,
+};
+const Icon = identity.icon;
 ---
-
-<article class="group relative border border-border rounded-sm p-4 sm:p-6 transition-all duration-75 [@media(hover:hover)]:hover:translate-x-0.5 [@media(hover:hover)]:hover:translate-y-0.5 bg-card">
-  <div class="absolute inset-0 border border-border rounded-sm -translate-x-0.5 -translate-y-0.5 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-opacity duration-75 pointer-events-none" aria-hidden="true"></div>
-
-  <h3 class="font-black text-base sm:text-lg mb-2 [@media(hover:hover)]:group-hover:text-primary transition-colors">
-    {title}
-  </h3>
-
-  <p class="text-sm text-muted-foreground mb-4">
-    {description}
-  </p>
-
-  {disclaimer && (
-    <p class="flex items-start gap-2 border-l-2 border-primary/50 pl-3 mb-4 text-xs leading-relaxed text-muted-foreground">
-      <Info class="size-3.5 mt-0.5 shrink-0 text-primary" aria-hidden="true" />
-      <span>{disclaimer}</span>
-    </p>
-  )}
-
-  <div class="flex flex-wrap gap-1.5 sm:gap-2 mb-4">
-    {stack.map((tech) => (
-      <span class="inline-flex items-center font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.15em] bg-primary text-primary-foreground px-1.5 sm:px-2 py-0.5">
-        {tech}
-      </span>
-    ))}
+<article class:list={["project-card", `project-${identity.accent}`]} data-reveal>
+  <div class="project-visual" aria-hidden="true">
+    <span class="visual-label label-ui">{identity.label}</span>
+    <div class="project-emblem"><span class="emblem-frame"></span><span class="emblem-frame frame-two"></span><Icon size={54} stroke-width={1.2} /></div>
+    <span class="visual-word">{title}</span>
+    <span class="visual-cross">+</span>
   </div>
-
-  <div class="flex gap-3">
-    {githubUrl && (
-      <a
-        href={githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="label-ui inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
-        aria-label={`View source code of ${title} on GitHub`}
-      >
-        <SimpleIcon path={siGithub.path} title={siGithub.title} class="size-3.5" /> GitHub <ArrowRight class="size-3" />
-      </a>
-    )}
-    {liveUrl && (
-      <a
-        href={liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="label-ui inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
-        aria-label={`View website of ${title}`}
-      >
-        <ExternalLink class="size-3.5" /> Website <ArrowRight class="size-3" />
-      </a>
-    )}
+  <div class="project-content">
+    <h3>{title}</h3>
+    <p>{description}</p>
+    {disclaimer && <p class="project-disclaimer">{disclaimer}</p>}
+    <ul class="tech-list" aria-label={`${title} technologies`}>{stack.map((tech) => <li>{tech}</li>)}</ul>
+    <div class="project-links">
+      {liveUrl && <a class="text-link" href={liveUrl} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${title} website`}>Visit project <ArrowUpRight size={15} /></a>}
+      {githubUrl && <a class="text-link source-link" href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`View ${title} source on GitHub`}>Source <ArrowUpRight size={15} /></a>}
+    </div>
   </div>
 </article>

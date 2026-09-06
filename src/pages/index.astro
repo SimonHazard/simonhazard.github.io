@@ -2,9 +2,10 @@
 import Base from "@/layouts/Base.astro";
 import ArticleCard from "@/components/custom/ArticleCard.astro";
 import ProjectCard from "@/components/custom/ProjectCard.astro";
+import Orbital from "@/components/custom/Orbital.astro";
 import Barcode from "@/components/custom/Barcode.astro";
 import { getCollection } from "astro:content";
-import { ArrowRight } from "@lucide/astro";
+import { ArrowUpRight, ArrowDown, ArrowRight } from "@lucide/astro";
 import { t } from "@/i18n/utils";
 import { sortByDate } from "@/lib/utils";
 
@@ -12,94 +13,49 @@ const [allArticles, featuredProjects] = await Promise.all([
   getCollection("articles", ({ data }) => !data.draft),
   getCollection("projects", ({ data }) => data.featured),
 ]);
-
 const latestArticles = sortByDate(allArticles).slice(0, 3);
 ---
 
-<Base title="Home">
-  <section class="py-12 sm:py-16 md:py-24 animate-slide-up">
-    <div class="flex items-center gap-3 mb-6">
-      <Barcode class="hidden sm:flex" />
-      <span class="label-ui text-muted-foreground">{t("home.subtitle")}</span>
+<Base title="Web developer & maker" description="Independent projects, useful tools, and field notes on building for the web. Explore Simon Hazard’s portfolio.">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-topline label-ui"><span><i class="status-dot"></i> Web developer / TypeScript</span><span class="hero-edition">Personal portfolio · {new Date().getFullYear()}</span></div>
+    <div class="hero-body">
+      <div class="hero-copy">
+        <h1 id="hero-title" class="hero-title">SIMON<span>HAZARD<span class="name-period" aria-hidden="true">✳</span></span></h1>
+        <p class="hero-description">Useful tools.<br /><span>A playful state of mind.</span></p>
+        <p class="hero-intro">I build for the web and beyond. A collection of independent projects, experiments, and things learned along the way.</p>
+        <div class="hero-actions">
+          <a href="#selected-work" class="button button-primary">Explore my work <ArrowDown size={16} /></a>
+          <a href="/static/simon-hazard.pdf" download class="button button-quiet">{t("home.downloadCV")} <ArrowUpRight size={16} /></a>
+        </div>
+      </div>
+      <Orbital />
     </div>
+    <div class="hero-bottom"><button class="motion-toggle label-ui" data-motion-toggle aria-pressed="false" hidden><span data-motion-label>Pause motion</span><span aria-hidden="true">Ⅱ</span></button></div>
+  </section>
 
-    <h1 class="font-black text-3xl sm:text-4xl md:text-6xl leading-none mb-6">
-      SIMON<br />
-      <span class="text-primary">HAZARD</span>
-    </h1>
-
-    <p class="text-base sm:text-lg text-muted-foreground max-w-xl mb-8">
-      {t("home.description")}
-    </p>
-
-    <div class="flex flex-col sm:flex-row flex-wrap gap-3">
-      <a
-        href="/articles"
-        class="inline-flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.15em] font-bold bg-primary text-primary-foreground h-10 px-6 rounded-sm hover:brightness-110 transition-all duration-75"
-      >
-        {t("home.readArticles")}
-      </a>
-      <a
-        href="/static/simon-hazard.pdf"
-        download
-        class="inline-flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.15em] font-bold border border-border h-10 px-6 rounded-sm hover:bg-primary hover:text-primary-foreground transition-all duration-75"
-      >
-        {t("home.downloadCV")}
-      </a>
+  <section id="selected-work" class="portfolio-section" aria-labelledby="work-title">
+    <div class="section-heading" data-reveal>
+      <div><p class="eyebrow">From idea to release</p><h2 id="work-title">Selected work<span class="section-count">/{String(featuredProjects.length).padStart(2, "0")}</span></h2></div>
+      <a href="/projects" class="text-link">All projects <ArrowUpRight size={16} /></a>
+    </div>
+    <div class="project-grid">
+      {featuredProjects.map((project) => <ProjectCard {...project.data} />)}
     </div>
   </section>
 
-  {featuredProjects.length > 0 && (
-    <section class="mb-20">
-      <div class="flex items-center gap-3 mb-8">
-        <span class="label-ui text-primary">{t("home.featuredProjects")}</span>
-        <div class="flex-1 h-px bg-border opacity-30"></div>
-      </div>
-      <div class="grid gap-4 md:grid-cols-2">
-        {featuredProjects.map((project) => (
-          <ProjectCard
-            title={project.data.title}
-            description={project.data.description}
-            disclaimer={project.data.disclaimer}
-            stack={project.data.stack}
-            githubUrl={project.data.githubUrl}
-            liveUrl={project.data.liveUrl}
-          />
-        ))}
-      </div>
-      <div class="mt-6">
-        <a href="/projects" class="label-ui text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1.5">
-          {t("home.allProjects")} <ArrowRight class="size-3" />
-        </a>
-      </div>
-    </section>
-  )}
+  <section class="portfolio-section journal-section" aria-labelledby="journal-title">
+    <div class="section-heading" data-reveal>
+      <div><p class="eyebrow">Notes from the process</p><h2 id="journal-title">Field notes<span class="section-count">/ Blog</span></h2></div>
+      <a href="/articles" class="text-link">All articles <ArrowUpRight size={16} /></a>
+    </div>
+    <div class="journal-list">
+      {latestArticles.map((article) => <ArticleCard {...article.data} href={`/articles/${article.id}`} />)}
+    </div>
+  </section>
 
-  {latestArticles.length > 0 && (
-    <section class="mb-20">
-      <div class="flex items-center gap-3 mb-8">
-        <span class="label-ui text-primary">{t("home.latestArticles")}</span>
-        <div class="flex-1 h-px bg-border opacity-30"></div>
-      </div>
-      <div class="grid gap-4">
-        {latestArticles.map((article) => (
-          <ArticleCard
-            title={article.data.title}
-            description={article.data.description}
-            date={article.data.date}
-            category={article.data.category}
-            tags={article.data.tags}
-            lang={article.data.lang}
-            href={`/articles/${article.id}`}
-            ai={article.data.ai}
-          />
-        ))}
-      </div>
-      <div class="mt-6">
-        <a href="/articles" class="label-ui text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1.5">
-          {t("home.allArticles")} <ArrowRight class="size-3" />
-        </a>
-      </div>
-    </section>
-  )}
+  <section class="about-strip" data-reveal>
+    <div><Barcode /><p class="eyebrow">The person behind the projects</p></div>
+    <div><h2>Curiosity is the common thread.</h2><p>Front-end development, open-source tools, video games and board games. I like understanding how things work — then making something of my own.</p><a href="/about" class="text-link">A little more about me <ArrowRight size={16} /></a></div>
+  </section>
 </Base>

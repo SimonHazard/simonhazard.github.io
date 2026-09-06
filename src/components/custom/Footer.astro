@@ -1,36 +1,12 @@
 ---
 import Barcode from "./Barcode.astro";
-import SimpleIcon from "./SimpleIcon.astro";
-import { siGithub, siKofi } from "simple-icons";
+import Monogram from "./Monogram.astro";
+import { ArrowUpRight } from "@lucide/astro";
 ---
-
-<footer class="border-t border-border mt-20 no-print">
-  <div class="max-w-5xl mx-auto px-4 py-8 flex flex-col items-center gap-4">
-    <Barcode />
-    <div class="flex items-center gap-4">
-      <a
-        href="https://github.com/SimonHazard"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="label-ui inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
-        aria-label="Simon Hazard on GitHub"
-      >
-        <SimpleIcon path={siGithub.path} title={siGithub.title} class="size-4" /> GitHub
-      </a>
-      <span class="text-muted-foreground">·</span>
-      <a
-        href="https://ko-fi.com/simonhazard"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="label-ui inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
-        aria-label="Support Simon Hazard on Ko-fi"
-      >
-        <SimpleIcon path={siKofi.path} title={siKofi.title} class="size-4" /> Ko-fi
-      </a>
-      <span class="text-muted-foreground">·</span>
-      <span class="label-ui text-muted-foreground">
-        {new Date().getFullYear()} Simon HAZARD
-      </span>
-    </div>
+<footer class="site-footer no-print">
+  <div class="footer-inner">
+    <div class="footer-signature"><a href="/" class="footer-logo" aria-label="Simon Hazard — Home"><Monogram /></a><span class="label-ui">Always curious.<br />Always building.</span></div>
+    <div class="footer-links"><a href="https://github.com/SimonHazard" target="_blank" rel="noopener noreferrer" class="text-link">GitHub <ArrowUpRight size={14} /></a><a href="https://ko-fi.com/simonhazard" target="_blank" rel="noopener noreferrer" class="text-link">Ko-fi <ArrowUpRight size={14} /></a><a href="/static/simon-hazard.pdf" download class="text-link">Resume <ArrowUpRight size={14} /></a></div>
+    <div class="footer-bottom label-ui"><span>© {new Date().getFullYear()} Simon Hazard</span><Barcode /></div>
   </div>
 </footer>

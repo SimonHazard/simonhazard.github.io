@@ -5,8 +5,8 @@ import { t } from "@/i18n/utils";
 ---
 
 <Base title={t("about.title")} description={t("about.description")}>
-  <div class="animate-slide-up max-w-2xl">
-    <h1 class="font-black text-3xl md:text-4xl mb-10">{t("about.title")}</h1>
+  <div class="animate-slide-up about-page">
+    <header class="page-heading"><p class="eyebrow">Behind the projects</p><h1>{t("about.title")}</h1></header>
 
     <div class="flex items-center gap-3 mb-6">
       <Barcode />
@@ -30,7 +30,7 @@ import { t } from "@/i18n/utils";
           href="https://github.com/SimonHazard"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.15em] font-bold border border-border h-10 px-6 rounded-sm hover:bg-primary hover:text-primary-foreground transition-all duration-75"
+          class="button button-quiet"
           aria-label="GitHub profile"
         >
           GitHub
@@ -38,7 +38,7 @@ import { t } from "@/i18n/utils";
         <a
           href="/static/simon-hazard.pdf"
           download
-          class="inline-flex items-center justify-center font-mono text-[10px] uppercase tracking-[0.15em] font-bold bg-primary text-primary-foreground h-10 px-6 rounded-sm hover:brightness-110 transition-all duration-75"
+          class="button button-primary"
         >
           {t("home.downloadCV")}
         </a>
